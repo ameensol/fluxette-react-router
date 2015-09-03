@@ -4,8 +4,7 @@ import RepoCard from './repo.card.js';
 import { search } from '../flux/actions';
 import { TextField } from 'mdl-react';
 
-let dispatch = (c, ...args) =>
-	c.context.flux.dispatch(...args);
+let dispatch = (c, ...args) => c.context.flux.dispatch(...args);
 
 @connect()
 export default class Repos extends React.Component {

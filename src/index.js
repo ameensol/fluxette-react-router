@@ -8,31 +8,25 @@ import Repos from './views/repos';
 import RepoDetails from './views/repo.details';
 import Test from './views/test';
 
-let routes = (
+let context = (flux, children) =>
+	<Context flux={flux}>{children}</Context>
+
+let routes = (flux) => {
 	<Route>
-		<Route path='/' handler={ Index }
-			indexRoute={{ handler: Repos }}>
+		<Route path='/' handler={ context(flux, Index) }>
 			<Route path=':owner/:repo' handler={ RepoDetails } />
 		</Route>
-		<Route path='/2' handler={ Test }/>
+		<Route path='/2' handler={ context(flux, Test) }/>
 	</Route>
-)
+}
 
-Router.run(routes, Router.HistoryLocation, (App, state) => {
+Router.run(routes(flux), Router.HistoryLocation, (App, state) => {
 
 	console.log('Router.run cb')
+	console.log(App)
+	console.log(state)
 
-	class Root extends React.Component {
-		render() {
-			return (
-				<Context flux={ flux }>
-					{ () => <App {...state}/> }
-				</Context>
-			);
-		}
-	}
-
-	React.render(<Root/>, document.getElementById('root'));
+	React.render(<App {...state}/>, document.getElementById('root'));
 })
 
 
