@@ -3,6 +3,9 @@ import { connect } from 'fluxette';
 import { Link } from 'react-router'
 import { Layout, Button, Icon } from 'mdl-react';
 import FloatingLoader from './floating.loader';
+import { search } from '../flux/actions'
+
+let dispatch = (c, ...args) => c.context.flux.dispatch(...args);
 
 @connect()
 export default class Test extends React.Component {
@@ -11,6 +14,9 @@ export default class Test extends React.Component {
 	}
 	goBack() {
 		this.context.router.goBack();
+	}
+	componentWillMount() {
+		dispatch(this, search('test'))
 	}
 	render() {
 		let links = [

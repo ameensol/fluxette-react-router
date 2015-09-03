@@ -20,6 +20,8 @@ let routes = (
 
 Router.run(routes, Router.HistoryLocation, (App, state) => {
 
+	console.log('Router.run cb')
+
 	class Root extends React.Component {
 		render() {
 			return (
